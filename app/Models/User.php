@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRole;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,7 +20,7 @@ class User extends Base implements
 	AuthorizableContract,
 	CanResetPasswordContract {
 	
-	use HasFactory, Notifiable;
+	use Notifiable;
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 	
 	/**
@@ -55,6 +57,15 @@ class User extends Base implements
 			'email_verified_at' => 'datetime',
 			'password'          => 'hashed',
 		];
+	}
+	
+	public function profile (): HasOne|User {
+		if ($this->role == UserRole::Patient->value) {
+			return $this->hasOne(PatientProfile::class, "patient_id", "id");
+		} else {
+			return $this->hasOne(UserProfile::class, "user_id", "id");
+		}
+		
 	}
 	
 }

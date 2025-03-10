@@ -41,7 +41,7 @@ class UserSeeder extends Seeder {
 							->inRandomOrder()
 							->first();
 				
-				$created_at = fake()->dateTimeBetween($user->created_at, "-1 month");
+				$created_at = fake()->dateTimeBetween($user->created_at, "-4 months");
 			}
 			
 			User::create([
