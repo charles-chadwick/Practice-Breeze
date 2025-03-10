@@ -60,6 +60,12 @@ class User extends Base implements
 		];
 	}
 	
+	/**
+	 * Get the profile, based on user type
+	 *
+	 * @todo Later on make this a polymorphic relationship
+	 * @return HasOne|User
+	 */
 	public function profile (): HasOne|User {
 		
 		if ($this->role == UserRole::Patient->value) {
@@ -70,9 +76,23 @@ class User extends Base implements
 		}
 	}
 	
+	/**
+	 * Get the appointments for this user
+	 *
+	 * @return HasMany
+	 */
 	public function appointments (): HasMany {
 		
-		return $this->hasMany(Appointment::class);
+		return $this->hasMany(Appointment::class, "patient_id", "id");
 	}
 	
+	/**
+	 * The full name attribute
+	 *
+	 * @return string
+	 */
+	public function getFullNameAttribute(): string {
+		return "{$this->first_name} {$this->last_name}";
+	}
+
 }
