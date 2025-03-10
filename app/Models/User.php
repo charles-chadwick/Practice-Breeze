@@ -10,6 +10,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -60,12 +61,18 @@ class User extends Base implements
 	}
 	
 	public function profile (): HasOne|User {
+		
 		if ($this->role == UserRole::Patient->value) {
 			return $this->hasOne(PatientProfile::class, "patient_id", "id");
-		} else {
+		}
+		else {
 			return $this->hasOne(UserProfile::class, "user_id", "id");
 		}
+	}
+	
+	public function appointments (): HasMany {
 		
+		return $this->hasMany(Appointment::class);
 	}
 	
 }
