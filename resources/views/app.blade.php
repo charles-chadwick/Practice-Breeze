@@ -29,27 +29,27 @@
 			class="lg:hidden"
 			icon="bars-2"
 			inset="left" />
-	
-	<flux:brand
-			href="#"
-			logo="https://fluxui.dev/img/demo/logo.png"
-			name="Acme Inc."
-			class="max-lg:hidden dark:hidden" />
-	<flux:brand
-			href="#"
-			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"
-			name="Acme Inc."
-			class="max-lg:hidden! hidden dark:flex" />
+{{--	--}}
+{{--	<flux:brand--}}
+{{--			href="#"--}}
+{{--			logo="https://fluxui.dev/img/demo/logo.png"--}}
+{{--			name="Acme Inc."--}}
+{{--			class="max-lg:hidden dark:hidden" />--}}
+{{--	<flux:brand--}}
+{{--			href="#"--}}
+{{--			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"--}}
+{{--			name="Acme Inc."--}}
+{{--			class="max-lg:hidden! hidden dark:flex" />--}}
 	
 	<flux:navbar class="-mb-px max-lg:hidden">
 		<flux:navbar.item
 				icon="home"
 				href="#"
-				current>Home
+				current>{{ __("navigation.home") }}
 		</flux:navbar.item>
 		<flux:navbar.item
 				icon="calendar"
-				href="#">Calendar
+				href="#">{{ __("navigation.schedule") }}
 		</flux:navbar.item>
 	</flux:navbar>
 	
@@ -82,26 +82,26 @@
 			class="lg:hidden"
 			icon="x-mark" />
 	
-	<flux:brand
-			href="#"
-			logo="https://fluxui.dev/img/demo/logo.png"
-			name="Acme Inc."
-			class="px-2 dark:hidden" />
-	<flux:brand
-			href="#"
-			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"
-			name="Acme Inc."
-			class="px-2 hidden dark:flex" />
+{{--	<flux:brand--}}
+{{--			href="#"--}}
+{{--			logo="https://fluxui.dev/img/demo/logo.png"--}}
+{{--			name="Acme Inc."--}}
+{{--			class="px-2 dark:hidden" />--}}
+{{--	<flux:brand--}}
+{{--			href="#"--}}
+{{--			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"--}}
+{{--			name="Acme Inc."--}}
+{{--			class="px-2 hidden dark:flex" />--}}
 	
 	<flux:navlist variant="outline">
 		<flux:navlist.item
 				icon="home"
 				href="#"
-				current>Home
+				current>{{ __("navigation.home") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="calendar"
-				href="#">Calendar
+				href="#">{{ __("navigation.schedule") }}
 		</flux:navlist.item>
 	
 	</flux:navlist>
