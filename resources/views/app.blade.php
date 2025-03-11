@@ -51,13 +51,6 @@
 				icon="calendar"
 				href="#">Calendar
 		</flux:navbar.item>
-		
-		<flux:separator
-				vertical
-				variant="subtle"
-				class="my-2" />
-	
-	
 	</flux:navbar>
 	
 	<flux:spacer />
@@ -130,15 +123,16 @@
 <flux:main container>
 	<flux:heading
 			size="xl"
-			level="1">@yield("heading")
-	</flux:heading>
+			level="1">@yield("heading")</flux:heading>
+	
 	@hasSection("subheading")
 		<flux:subheading
 				size="lg"
-				class="mb-6">@yield("subheading")
-		</flux:subheading>
+				class="mb-6">@yield("subheading")</flux:subheading>
 	@endif
 	<flux:separator variant="subtle" />
+	
+	@yield("content")
 </flux:main>
 
 @fluxScripts
