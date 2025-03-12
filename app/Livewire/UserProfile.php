@@ -14,7 +14,6 @@ class UserProfile extends Component {
 	public ?User $user                  = null;
 	public       $role                  = "";
 	public       $first_name            = "";
-	public       $middle_name           = "";
 	public       $last_name             = "";
 	public       $email                 = "";
 	public       $password              = "";
