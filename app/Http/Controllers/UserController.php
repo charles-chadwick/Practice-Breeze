@@ -15,10 +15,4 @@ class UserController extends Controller {
 
 		return view("users.index", compact("users"));
 	}
-	
-	public function profile($user_id) {
-
-		return view("users.profile", ["user" => User::findorFail($user_id)]);
-	}
-	
 }

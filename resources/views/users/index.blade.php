@@ -21,7 +21,10 @@
 @endsection
 @section("content")
 	@if (session()->has('message'))
-		<flux:callout variant="success" icon="check-circle" heading="{{ session('message')  }}" />
+		<flux:callout
+				variant="success"
+				icon="check-circle"
+				heading="{{ session('message')  }}" />
 	@endif
 	<flux:table>
 		<flux:table.columns>
@@ -38,13 +41,15 @@
 					<flux:table.cell>{{ $user->first_name }}</flux:table.cell>
 					<flux:table.cell>{{ $user->last_name }}</flux:table.cell>
 					<flux:table.cell>{{ $user->email }}</flux:table.cell>
-
+					
 					<flux:table.cell>
 						<flux:dropdown>
 							<flux:button>...</flux:button>
 							<flux:menu>
 								<flux:menu.item icon="user-circle">
-									<a href="{{ route('users.profile', $user->id) }}">Profile</a>
+									<flux:modal.trigger :name="'edit-profile-'.$user->id">
+										<a href="#">Profile</a>
+									</flux:modal.trigger>
 								</flux:menu.item>
 								
 								<flux:menu.separator />
@@ -55,6 +60,9 @@
 							</flux:menu>
 						
 						</flux:dropdown>
+						<flux:modal :name="'edit-profile-'.$user->id">
+							<livewire:user-profile :user="$user"></livewire:user-profile>
+						</flux:modal>
 					</flux:table.cell>
 				
 				

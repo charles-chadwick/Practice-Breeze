@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,9 +11,14 @@ Route::prefix('/users')
 		 
 		 Route::get("/", [ UserController::class, "index" ])
 			  ->name("users.index");
+	 });
+
+Route::prefix('/patients')
+	 ->group(function () {
 		 
-		 Route::get("/profile/{id}", [ UserController::class, "profile" ])
-			  ->name("users.profile");
+		 Route::get("/", [ PatientController::class, "index" ])
+			  ->name("patients.index");
+
 	 });
 
 Route::prefix('/appointments')
