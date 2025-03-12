@@ -130,9 +130,10 @@
 				size="lg"
 				class="mb-6">@yield("subheading")</flux:subheading>
 	@endif
-	<flux:separator variant="subtle" />
-	
+	<flux:separator variant="subtle" class="mt-4" />
+	<div class="py-2">
 	@yield("content")
+	</div>
 </flux:main>
 
 @fluxScripts
