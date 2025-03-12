@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\UserRole;
 use App\Models\Patient;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,7 @@ class PatientSeeder extends Seeder {
 		$character_fp = file(database_path("sample/characters.csv"));
 		foreach ( $character_fp as $character ) {
 			
-			$super = User::whereNotIn("role", [ UserRole::Patient, UserRole::Admin ])
+			$super = User::whereNotIn("role", [ UserRole::Admin ])
 						 ->inRandomOrder()
 						 ->first();
 			
@@ -32,7 +33,7 @@ class PatientSeeder extends Seeder {
 				continue;
 			}
 			
-			$created_at = fake()->dateTimeBetween($super->created_at, "2021-01-01 01:01:01");
+			$created_at = fake()->dateTimeBetween($super->created_at, Carbon::parse($super->updated_at)->addMonths(rand(1, 6)));
 			
 			Patient::create([
 				"first_name"  => $first_name,
@@ -40,7 +41,7 @@ class PatientSeeder extends Seeder {
 				"last_name"   => $last_name,
 				"email"       => str_replace(" ", ".", strtolower("$first_name.$last_name@example.com")),
 				"password"    => "password",
-				"birth_date"  => fake()->dateTimeBetween($super->created_at, "-1 year"),
+				"birth_date"  => fake()->dateTimeBetween("-80 year", "-1 year"),
 				"gender"      => $gender,
 				"created_at"  => $created_at
 			]);

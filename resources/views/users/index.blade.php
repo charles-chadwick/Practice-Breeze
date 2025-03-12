@@ -16,7 +16,7 @@
 		</div>
 	</div>
 @endsection
-@section("subheading")
+@section("subheading")	<flux:separator class="my-4" />
 	{{ __("A list of all the users") }}
 @endsection
 @section("content")
@@ -28,10 +28,17 @@
 	@endif
 	<flux:table>
 		<flux:table.columns>
-			<flux:table.cell>Role</flux:table.cell>
-			<flux:table.cell>First</flux:table.cell>
-			<flux:table.cell>Last</flux:table.cell>
-			<flux:table.cell>Email</flux:table.cell>
+			<flux:table.cell>
+				<flux:link :href="route('users.index', ['order_by' => 'role'])">Role</flux:link>
+			</flux:table.cell>			<flux:table.cell>
+				<flux:link :href="route('users.index', ['order_by' => 'first_name'])">First Name</flux:link>
+			</flux:table.cell>
+			<flux:table.cell>
+				<flux:link :href="route('users.index', ['order_by' => 'last_name'])">Last Name</flux:link>
+			</flux:table.cell>
+			<flux:table.cell>
+				<flux:link :href="route('users.index', ['order_by' => 'email'])">Email</flux:link>
+			</flux:table.cell>
 			<flux:table.cell>Actions</flux:table.cell>
 		</flux:table.columns>
 		<flux:table.rows>
