@@ -29,31 +29,20 @@
 			class="lg:hidden"
 			icon="bars-2"
 			inset="left" />
-{{--	--}}
-{{--	<flux:brand--}}
-{{--			href="#"--}}
-{{--			logo="https://fluxui.dev/img/demo/logo.png"--}}
-{{--			name="Acme Inc."--}}
-{{--			class="max-lg:hidden dark:hidden" />--}}
-{{--	<flux:brand--}}
-{{--			href="#"--}}
-{{--			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"--}}
-{{--			name="Acme Inc."--}}
-{{--			class="max-lg:hidden! hidden dark:flex" />--}}
 	
 	<flux:navbar class="-mb-px max-lg:hidden">
 		<flux:navlist.item
 				icon="home"
 				href="#"
-				>{{ __("Home") }}
+		>{{ __("Home") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="user-circle"
 				href="{{ route('users.index') }}">{{ __("Users") }}
 		</flux:navlist.item>
 		<flux:navlist.item
-				icon="calendar"
-				href="#">{{ __("Schedule") }}
+				icon="user-circle"
+				href="{{ route('patients.index') }}">{{ __("Patients") }}
 		</flux:navlist.item>
 	</flux:navbar>
 	
@@ -86,30 +75,19 @@
 			class="lg:hidden"
 			icon="x-mark" />
 	
-{{--	<flux:brand--}}
-{{--			href="#"--}}
-{{--			logo="https://fluxui.dev/img/demo/logo.png"--}}
-{{--			name="Acme Inc."--}}
-{{--			class="px-2 dark:hidden" />--}}
-{{--	<flux:brand--}}
-{{--			href="#"--}}
-{{--			logo="https://fluxui.dev/img/demo/dark-mode-logo.png"--}}
-{{--			name="Acme Inc."--}}
-{{--			class="px-2 hidden dark:flex" />--}}
-	
 	<flux:navlist variant="outline">
 		<flux:navlist.item
 				icon="home"
 				href="#"
-				>{{ __("Home") }}
+		>{{ __("Home") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="user-circle"
 				href="{{ route('users.index') }}">{{ __("Users") }}
 		</flux:navlist.item>
 		<flux:navlist.item
-				icon="calendar"
-				href="#">{{ __("Schedule") }}
+				icon="user-circle"
+				href="{{ route('patients.index') }}">{{ __("Patients") }}
 		</flux:navlist.item>
 	
 	</flux:navlist>
@@ -138,9 +116,11 @@
 				size="lg"
 				class="mb-6">@yield("subheading")</flux:subheading>
 	@endif
-	<flux:separator variant="subtle" class="mt-4" />
+	<flux:separator
+			variant="subtle"
+			class="mt-4" />
 	<div class="py-2">
-	@yield("content")
+		@yield("content")
 	</div>
 </flux:main>
 
