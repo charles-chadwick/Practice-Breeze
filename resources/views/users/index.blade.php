@@ -1,14 +1,14 @@
 @extends("app")
 @section("heading")
-
+	
 	<div class="flex">
 		<div class="flex-1">
-		{{ __("Patients") }}
+			{{ __("Patients") }}
 		</div>
 		<div>
 			
 			<flux:modal.trigger name="add_user">
-			<flux:button variant="primary">{{ __("Add New") }}</flux:button>
+				<flux:button variant="primary">{{ __("Add New") }}</flux:button>
 			</flux:modal>
 			<flux:modal name="add_user">
 				<livewire:user-profile />
@@ -21,31 +21,30 @@
 @endsection
 @section("content")
 	@if (session()->has('message'))
-		
-		<div class="alert alert-success">
-			{{ session('message') }}
-		</div>
-	
+		<flux:callout variant="success" icon="check-circle" heading="{{ session('message')  }}" />
 	@endif
 	<flux:table>
 		<flux:table.columns>
-			<flux:table.cell>Name</flux:table.cell>
+			<flux:table.cell>Role</flux:table.cell>
+			<flux:table.cell>First</flux:table.cell>
+			<flux:table.cell>Last</flux:table.cell>
 			<flux:table.cell>Email</flux:table.cell>
-			<flux:table.cell>DOB</flux:table.cell>
 			<flux:table.cell>Actions</flux:table.cell>
 		</flux:table.columns>
 		<flux:table.rows>
-			@foreach($patients as $patient)
-				<flux:table.row wire:key="{{ $patient->id }}">
-					<flux:table.cell>{{ $patient->full_name }}</flux:table.cell>
-					<flux:table.cell>{{ $patient->email }}</flux:table.cell>
-					<flux:table.cell>{{ $patient->profile->dob }}</flux:table.cell>
+			@foreach($users as $user)
+				<flux:table.row wire:key="{{ $user->id }}">
+					<flux:table.cell>{{ $user->role }}</flux:table.cell>
+					<flux:table.cell>{{ $user->first_name }}</flux:table.cell>
+					<flux:table.cell>{{ $user->last_name }}</flux:table.cell>
+					<flux:table.cell>{{ $user->email }}</flux:table.cell>
+
 					<flux:table.cell>
 						<flux:dropdown>
 							<flux:button>...</flux:button>
 							<flux:menu>
 								<flux:menu.item icon="user-circle">
-									<a href="{{ route('users.profile', $patient->id) }}">Profile</a>
+									<a href="{{ route('users.profile', $user->id) }}">Profile</a>
 								</flux:menu.item>
 								
 								<flux:menu.separator />

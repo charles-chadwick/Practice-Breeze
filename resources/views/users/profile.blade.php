@@ -3,5 +3,11 @@
 	{{ __("Profile for ".$user->full_name)  }}
 @endsection
 @section("content")
-<livewire:user-profile :user="$user" />
+	@if (session()->has('message'))
+		<flux:callout
+				variant="success"
+				icon="check-circle"
+				heading="{{ session('message')  }}" />
+	@endif
+	<livewire:user-profile :user="$user" />
 @endsection

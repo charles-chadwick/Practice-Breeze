@@ -10,12 +10,10 @@ class UserController extends Controller {
 	
 	public function index () {
 		
-		$patients = User::with('profile')
-					 ->where("role", UserRole::Patient)
-					 ->orderBy("last_name")
+		$users = User::orderBy("last_name")
 					 ->get();
 
-		return view("users.index", compact("patients"));
+		return view("users.index", compact("users"));
 	}
 	
 	public function profile($user_id) {

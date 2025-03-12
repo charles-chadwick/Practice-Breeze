@@ -1,11 +1,11 @@
+@php use App\Enums\UserRole; @endphp
 <form wire:submit.prevent="{{ $action }}">
-
-	<div class="grid grid-cols-3 sm:grid-cols-2">
+	
+	<div class="grid grid-cols-2">
 		<div class="p-4">
 			<flux:input
 					type="text"
 					wire:model="first_name"
-					name="first_name"
 					label="First Name"
 					placeholder="First Name" />
 		</div>
@@ -13,48 +13,48 @@
 		<div class="p-4">
 			<flux:input
 					type="text"
-					wire:model="middle_name"
-					name="middle_name"
-					label="Middle Name"
-					placeholder="Middle Name" />
+					wire:model="last_name"
+					label="Last Name"
+					placeholder="Last Name" />
 		</div>
 		
 		<div class="p-4">
-			<flux:input
-					type="text"
-					wire:model="last_name"
-					name="last_name"
-					label="Last Name"
-					placeholder="Last Name" />
+			<flux:select
+					wire:model="role"
+					label="Role">
+				@foreach(UserRole::values() as $role_type => $role)
+					<flux:select.option value="{{ $role_type }}">{{ $role }}</flux:select.option>
+				@endforeach
+			</flux:select>
 		</div>
 		
 		<div class="p-4">
 			<flux:input
 					type="email"
 					wire:model="email"
-					name="email"
 					label="Email"
 					placeholder="Email" />
 		</div>
-		
 		<div class="p-4">
 			<flux:input
-					type="date"
-					wire:model="dob"
-					name="dob"
-					label="Date of Birth"
-					placeholder="Date of Birth" />
+					type="password"
+					wire:model="password"
+					label="Password"
+					placeholder="Password" />
 		</div>
-		
 		<div class="p-4">
-			<flux:select label="Gender" placeholder="Gender" wire:model="gender">
-				<flux:select.option value="Male">Male</flux:select.option>
-				<flux:select.option value="Female">Female</flux:select.option>
-			</flux:select>
+			<flux:input
+					type="password"
+					wire:model="password_confirmation"
+					label="Confirm Password"
+					placeholder="Confirm Password" />
 		</div>
 		
-		<div class="p-4 grid-cols-4 col-start-2 sm:grid-cols-2 sm:col-start-1">
-		<flux:button type="submit" variant="primary" class="w-full">Save</flux:button>
+		<div class="p-4 col-span-2 justify-center">
+			<flux:button
+					type="submit"
+					variant="primary">Save
+			</flux:button>
 		</div>
 	
 	</div>

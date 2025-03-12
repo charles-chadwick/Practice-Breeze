@@ -42,15 +42,19 @@
 {{--			class="max-lg:hidden! hidden dark:flex" />--}}
 	
 	<flux:navbar class="-mb-px max-lg:hidden">
-		<flux:navbar.item
+		<flux:navlist.item
 				icon="home"
 				href="#"
-				current>{{ __("navigation.home") }}
-		</flux:navbar.item>
-		<flux:navbar.item
+				>{{ __("Home") }}
+		</flux:navlist.item>
+		<flux:navlist.item
+				icon="user-circle"
+				href="{{ route('users.index') }}">{{ __("Users") }}
+		</flux:navlist.item>
+		<flux:navlist.item
 				icon="calendar"
-				href="#">{{ __("navigation.schedule") }}
-		</flux:navbar.item>
+				href="#">{{ __("Schedule") }}
+		</flux:navlist.item>
 	</flux:navbar>
 	
 	<flux:spacer />
@@ -97,11 +101,15 @@
 		<flux:navlist.item
 				icon="home"
 				href="#"
-				current>{{ __("navigation.home") }}
+				>{{ __("Home") }}
+		</flux:navlist.item>
+		<flux:navlist.item
+				icon="user-circle"
+				href="{{ route('users.index') }}">{{ __("Users") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="calendar"
-				href="#">{{ __("navigation.schedule") }}
+				href="#">{{ __("Schedule") }}
 		</flux:navlist.item>
 	
 	</flux:navlist>

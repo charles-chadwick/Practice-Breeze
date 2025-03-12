@@ -5,29 +5,28 @@ namespace App\Livewire;
 use App\Enums\UserRole;
 use App\Models\PatientProfile;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class UserProfile extends Component {
 	
-	public ?User $user        = null;
-	public       $first_name  = "";
-	public       $middle_name = "";
-	public       $last_name   = "";
-	public       $email       = "";
-	public       $dob;
-	public       $gender;
-	public $action = "save";
+	public ?User $user                  = null;
+	public       $role                  = "";
+	public       $first_name            = "";
+	public       $middle_name           = "";
+	public       $last_name             = "";
+	public       $email                 = "";
+	public       $password              = "";
+	public       $password_confirmation = "";
+	public       $action                = "save";
 	
-	public function mount (User $user) {
+	public function mount (?User $user): void {
 		
 		$this->user = $user;
 		$this->fill($this->user);
-		
-		if (!is_null($user->profile)) {
+		if (!is_null($user->id)) {
 			$this->action = "update";
-			$this->dob = $user->profile->dob;
-			$this->gender = $user->profile->gender;
 		}
 		
 	}
@@ -37,49 +36,43 @@ class UserProfile extends Component {
 		return view("livewire.user-profile");
 	}
 	
-	public function update () {
+	public function update (): null {
 		
 		$this->validate();
+		$this->user->update($this->all());
 		
-		$this->user->update($this->except("dob", "gender"));
-		$this->user->profile->update($this->only("dob", "gender"));
+		session()->flash("message", "User successfully updated.");
 		
-		session()->flash('status', 'User successfully updated.');
-		
-		return $this->redirect(route('users.profile', $this->user->id));
+		return $this->redirect(route("users.profile", $this->user->id));
 	}
 	
-	public function save () {
+	public function save (): null {
 		
 		$this->validate();
-		dd($this->dob);
-		$this->fill($this->all());
-		$data = $this->except("dob", "gender");
-		$data["role"] = UserRole::Patient;
-		$data["password"] = "password";
-		$this->user = User::create($data);
+		$this->user = User::create($this->all());
 		
-		PatientProfile::create([
-			"patient_id" => $this->user->id,
-			"dob" => $this->dob,
-			"gender" => $this->gender,
-		]);
+		session()->flash("message", "User successfully created.");
 		
-		session()->flash('status', 'User successfully updated.');
-		
-		return $this->redirect(route('users.profile', $this->user->id));
+		return $this->redirect(route("users.profile", $this->user->id));
 	}
 	
-	public function rules () {
+	public function rules (): array {
 		
-		return [
-			"first_name"  => "required|min:3",
-			"middle_name" => "nullable|min:3",
-			"last_name"   => "required|min:3",
-			"email"       => "required|email",
-			"dob"         => "nullable|date",
-			"gender"      => "nullable|string",
+		$rules = [
+			"role"                  => [ "required", Rule::in(UserRole::cases()) ],
+			"first_name"            => "required|min:3",
+			"last_name"             => "required|min:3",
+			"email"                 => "required|email",
+			"password"              => "required|min:8",
+			"password_confirmation" => "required|min:8|same:password",
 		];
+		
+		if ($this->action === "update") {
+			$rules[ "password" ] = "sometimes|min:8";
+			$rules[ "password_confirmation" ] = "sometimes|required_with:password|min:8|same:password";
+		}
+		
+		return $rules;
 	}
 	
 }
