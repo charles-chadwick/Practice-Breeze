@@ -3,7 +3,7 @@
 	
 	<div class="flex">
 		<div class="flex-1">
-			{{ __("Patients") }}
+			{{ __("Users") }}
 		</div>
 		<div>
 			
@@ -17,7 +17,7 @@
 	</div>
 @endsection
 @section("subheading")
-	{{ __("A list of all the patients") }}
+	{{ __("A list of all the users") }}
 @endsection
 @section("content")
 	@if (session()->has('message'))
