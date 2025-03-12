@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Base implements
+class Patient extends Base implements
 	AuthenticatableContract,
 	AuthorizableContract,
 	CanResetPasswordContract {
@@ -24,16 +24,20 @@ class User extends Base implements
 	use Notifiable;
 	use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 	
+	protected $table = 'patients';
+	
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var list<string>
 	 */
 	protected $fillable = [
-		"role",
 		"first_name",
+		"middle_name",
 		"last_name",
 		"email",
+		"birth_date",
+		"gender",
 		"password",
 	];
 	
@@ -58,6 +62,16 @@ class User extends Base implements
 			"email_verified_at" => "datetime",
 			"password"          => "hashed",
 		];
+	}
+	
+	/**
+	 * Get the appointments for this user
+	 *
+	 * @return HasMany
+	 */
+	public function appointments (): HasMany {
+		
+		return $this->hasMany(Appointment::class, "patient_id", "id");
 	}
 	
 	/**

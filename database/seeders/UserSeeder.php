@@ -15,50 +15,41 @@ class UserSeeder extends Seeder {
 	 */
 	public function run (): void {
 		
-		DB::table('users')->truncate();
+		DB::table('users')
+		  ->truncate();
 		$super = User::create([
 			"role"        => "Admin",
 			"first_name"  => "John",
-			"middle_name" => "Ben",
 			"last_name"   => "Doe",
 			"email"       => "john.doe@example.com",
 			"password"    => "password",
 			"created_at"  => "2020-01-01 01:01:01"
 		]);
 		
-		$character_fp = fopen(database_path("sample/characters.csv"), "r");
-		while ( !feof($character_fp) ) {
+		$character_fp = file(database_path("sample/characters.csv"));
+		foreach($character_fp as $character) {
 			
 			// get the data
-			[ $first_name, $middle_name, $last_name, $gender, $role ] = array_map('trim', fgetcsv($character_fp));
-			
-			// set a good created_at time based on the role
-			$created_at = fake()->dateTimeBetween($super->created_at, "-1 years");
+			[ $first_name, $middle_name, $last_name, $gender, $role ] = array_map('trim', str_getcsv($character));
+
 			if ($role == "Patient") {
-				
-				// this can be used later to set the created_by field
-				$user = User::where("role", "!=", "Patient")
-							->inRandomOrder()
-							->first();
-				
-				$created_at = fake()->dateTimeBetween($user->created_at, "-4 months");
+				continue;
 			}
 			
+			$created_at = fake()->dateTimeBetween($super->created_at, "2021-01-01 01:01:01");
+			
 			User::create([
-				"role"        => $role,
-				"first_name"  => $first_name,
-				"middle_name" => $middle_name,
-				"last_name"   => $last_name,
-				"email"       => str_replace(" ", ".", strtolower("$first_name.$last_name@example.com")),
-				"password"    => "password",
-				"created_at"  => $created_at
+				"role"       => $role,
+				"first_name" => $first_name,
+				"last_name"  => $last_name,
+				"email"      => str_replace(" ", ".", strtolower("$first_name.$last_name@example.com")),
+				"password"   => "password",
+				"created_at" => $created_at
 			]);
 			
 			
 		}
-		fclose($character_fp);
-		
-		
+
 	}
 	
 }

@@ -15,11 +15,10 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run (): void {
 		
-		// (new UserSeeder())->run();
-		// (new PatientProfileSeeder())->run();
-		// (new UserProfileSeeder())->run();
+	//	 (new UserSeeder())->run();
+		 (new PatientSeeder())->run();
 		// (new AppointmentSeeder())->run();
-		(new MediaSeeder())->run();
+//		(new MediaSeeder())->run();
 	}
 	
 }
