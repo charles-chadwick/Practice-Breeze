@@ -32,17 +32,16 @@
 	
 	<flux:navbar class="-mb-px max-lg:hidden">
 		<flux:navlist.item
-				icon="home"
-				href="#"
-		>{{ __("Home") }}
-		</flux:navlist.item>
-		<flux:navlist.item
-				icon="user-circle"
+				icon="user"
 				href="{{ route('users.index') }}">{{ __("Users") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="user-circle"
 				href="{{ route('patients.index') }}">{{ __("Patients") }}
+		</flux:navlist.item>
+		<flux:navlist.item
+				icon="calendar-days"
+				href="{{ route('appointments.index') }}">{{ __("Appointments") }}
 		</flux:navlist.item>
 	</flux:navbar>
 	
@@ -82,12 +81,16 @@
 		>{{ __("Home") }}
 		</flux:navlist.item>
 		<flux:navlist.item
-				icon="user-circle"
+				icon="user"
 				href="{{ route('users.index') }}">{{ __("Users") }}
 		</flux:navlist.item>
 		<flux:navlist.item
 				icon="user-circle"
 				href="{{ route('patients.index') }}">{{ __("Patients") }}
+		</flux:navlist.item>
+		<flux:navlist.item
+				icon="calendar-days"
+				href="{{ route('appointments.index') }}">{{ __("Appointments") }}
 		</flux:navlist.item>
 	
 	</flux:navlist>

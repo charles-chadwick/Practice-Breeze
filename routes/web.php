@@ -18,12 +18,13 @@ Route::prefix('/patients')
 		 
 		 Route::get("/", [ PatientController::class, "index" ])
 			  ->name("patients.index");
-
+		 
 	 });
 
 Route::prefix('/appointments')
 	 ->group(function () {
 		 
-		 Route::get("/", [ AppointmentController::class, "index" ]);
+		 Route::get("/", [ AppointmentController::class, "index" ])
+			  ->name("appointments.index");
 		 
 	 });

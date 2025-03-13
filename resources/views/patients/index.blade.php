@@ -32,6 +32,8 @@
 	<flux:table>
 		<flux:table.columns>
 			<flux:table.cell>
+				MRN
+			</flux:table.cell>			<flux:table.cell>
 				<flux:link :href="route('patients.index', ['order_by' => 'first_name'])">First Name</flux:link>
 			</flux:table.cell>
 			<flux:table.cell>
@@ -49,6 +51,7 @@
 		<flux:table.rows>
 			@foreach($patients as $patient)
 				<flux:table.row wire:key="{{ $patient->id }}">
+					<flux:table.cell>#{{ $patient->id }}</flux:table.cell>
 					<flux:table.cell>
 						
 						{{ $patient->first_name }}
