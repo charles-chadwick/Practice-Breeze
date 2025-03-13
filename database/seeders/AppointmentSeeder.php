@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AppointmentStatus;
 use App\Models\Appointment;
-use App\Models\User;
+use App\Models\Patient;
 use Arr;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,17 +17,21 @@ class AppointmentSeeder extends Seeder {
 	 */
 	public function run (): void {
 		
-		foreach ( User::where("role", "Patient")
-					  ->get() as $patient ) {
+		foreach ( Patient::get() as $patient ) {
 			
 			for ( $i = 0; $i <= rand(0, 20); $i++ ) {
 				
 				$date_time = Carbon::parse(fake()->dateTimeBetween($patient->created_at, "+3 months"))
 								   ->setTime(rand(8, 15), 0);
 				
-				$status = "Scheduled";
+				$status = AppointmentStatus::Scheduled;
 				if ($date_time < Carbon::now()) {
-					$status = "Completed";
+					$status = AppointmentStatus::Completed;
+				}
+				
+				// throw in some cancelled appts for fun
+				if (rand(0, 25) < 5) {
+					$status = AppointmentStatus::Cancelled;
 				}
 				
 				Appointment::create([
