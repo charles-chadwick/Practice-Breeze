@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\AppointmentStatus;
 use App\Models\Appointment;
+use App\Models\AppointmentType;
 use App\Models\Patient;
 use App\Rules\AppointmentExists;
 use Carbon\Carbon;
@@ -14,14 +15,15 @@ use Livewire\Component;
 class AppointmentForm extends Component {
 	
 	public ?Appointment $appointment;
-	public              $date       = null;
-	public              $time       = null;
-	public              $title      = null;
-	public              $type       = null;
-	public              $status     = null;
-	public              $length     = null;
-	public              $patient_id = null;
-	public              $comments   = null;
+	public              $date                = null;
+	public              $time                = null;
+	public              $title               = null;
+	public              $type                = null;
+	public              $status              = null;
+	public              $length              = null;
+	public              $patient_id          = null;
+	public              $appointment_type_id = null;
+	public              $comments            = null;
 	
 	public $statuses = [];
 	public $types    = [];
@@ -35,11 +37,7 @@ class AppointmentForm extends Component {
 		
 		$this->date = date("Y-m-d");
 		$this->time = date("H:i");
-		$this->types = [
-			"In Office"  => "In Office",
-			"House Call" => "House Call",
-		];
-		
+		$this->types = AppointmentType::all();
 		$this->statuses = AppointmentStatus::cases();
 		
 		if (!is_null($appointment->date_and_time)) {

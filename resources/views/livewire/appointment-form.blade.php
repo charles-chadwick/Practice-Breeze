@@ -38,10 +38,10 @@
 		
 		<div class="p-4">
 			<flux:select
-					wire:model="type"
+					wire:model="appointment_type_id"
 					label="Type">
-				@foreach($types as $type_key => $type)
-					<flux:select.option value="{{ $type_key }}" wire:key="{{ $type_key }}">{{ $type }}</flux:select.option>
+				@foreach($types as $type)
+					<flux:select.option value="{{ $type->id }}" wire:key="{{ $type->id }}">{{ $type->title }}</flux:select.option>
 				@endforeach
 			</flux:select>
 		</div>

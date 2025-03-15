@@ -1,12 +1,31 @@
 @extends("app")
 @section("heading")
-	{{__("Appointment Types")}}
+	
+	<div class="flex">
+		<div class="flex-1">
+			{{ __("Appointment Types") }}
+		</div>
+		<div>
+			
+			<flux:modal.trigger name="add_appointment">
+				<flux:button variant="primary">{{ __("Add New") }}</flux:button>
+			</flux:modal>
+			<flux:modal name="add_appointment">
+				<livewire:appointment-type-form />
+			</flux:modal>
+		</div>
+	</div>
 @endsection
 @section("subheading")
 	All the appointment types!
 @endsection
 @section("content")
-	
+	@if (session()->has('message'))
+		<flux:callout
+				variant="success"
+				icon="check-circle"
+				heading="{{ session('message')  }}" />
+	@endif
 	<flux:table>
 		<flux:table.columns>
 			<flux:table.cell>
@@ -50,7 +69,7 @@
 						</flux:dropdown>
 						
 						<flux:modal :name="'edit-appointment-form-'.$appointment_type->id">
-							sup
+							<livewire:appointment-type-form :type="$appointment_type" />
 						</flux:modal>
 					</flux:table.cell>
 				</flux:table.row>

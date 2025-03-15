@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\AppointmentStatus;
 use App\Models\Appointment;
+use App\Models\AppointmentType;
 use App\Models\Patient;
 use Arr;
 use Carbon\Carbon;
@@ -29,19 +30,22 @@ class AppointmentSeeder extends Seeder {
 					$status = AppointmentStatus::Completed;
 				}
 				
-				// throw in some cancelled appts for fun
+				// throw in some cancelled/rescheduled appts for fun
 				if (rand(0, 25) < 5) {
-					$status = AppointmentStatus::Cancelled;
+					$status = Arr::random([ AppointmentStatus::Cancelled->value, AppointmentStatus::Rescheduled->value ]);
 				}
 				
+				$appointment_type = AppointmentType::inRandomOrder()
+												   ->first();
+				
 				Appointment::create([
-					"patient_id"    => $patient->id,
-					"status"        => $status,
-					"date_and_time" => $date_time,
-					"length"        => Arr::random([ 15, 30, 45 ]),
-					"type"          => "In Office",
-					"title"         => fake()->text(rand(10, 20)),
-					"comments"      => fake()->text(rand(10, 200)),
+					"patient_id"          => $patient->id,
+					"appointment_type_id" => $appointment_type->id,
+					"status"              => $status,
+					"date_and_time"       => $date_time,
+					"length"              => $appointment_type->length,
+					"title"               => $appointment_type->title . " - " . fake()->text(rand(10, 20)),
+					"comments"            => fake()->text(rand(10, 200)),
 				]);
 				
 			}

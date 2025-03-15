@@ -61,7 +61,7 @@
 						</flux:badge>
 						</flux:table.cell>
 					<flux:table.cell>{{ $appointment->status }}</flux:table.cell>
-					<flux:table.cell>{{ $appointment->type }}</flux:table.cell>
+					<flux:table.cell>{{ $appointment->type->title }}</flux:table.cell>
 					<flux:table.cell>{{ $appointment->title }}</flux:table.cell>
 					<flux:table.cell>
 						<flux:link :href="route('appointments.index', ['patient_id' => $appointment->patient->id])">
