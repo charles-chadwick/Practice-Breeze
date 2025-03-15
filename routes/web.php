@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentTypeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,9 @@ Route::prefix('/appointments')
 		 
 		 Route::get("/", [ AppointmentController::class, "index" ])
 			  ->name("appointments.index");
+		 
+		 // the appointment types
+		 Route::resource("types", AppointmentTypeController::class);
+		 
 		 
 	 });
