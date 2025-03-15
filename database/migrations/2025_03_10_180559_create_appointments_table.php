@@ -18,6 +18,7 @@ return new class extends Migration
 			$table->dateTime("date_and_time");
 			$table->integer("length");
 			$table->string("status");
+			$table->string("type");
 			$table->string("title");
 			$table->text("comments")->nullable();
             $table->timestamps();

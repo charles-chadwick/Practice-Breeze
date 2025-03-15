@@ -1,4 +1,4 @@
-<form wire:submit.prevent="{{ $action }}">
+<form wire:submit.prevent="save">
 	
 	<div class="grid grid-cols-2">
 		

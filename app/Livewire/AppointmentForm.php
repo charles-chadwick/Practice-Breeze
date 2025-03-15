@@ -28,7 +28,6 @@ class AppointmentForm extends Component {
 	public $statuses = [];
 	public $types    = [];
 	public $patients = [];
-	public $action   = "save";
 	
 	public function mount (Appointment $appointment): void {
 		
@@ -55,9 +54,10 @@ class AppointmentForm extends Component {
 		
 		$this->validate();
 		$data = $this->all();
+		$data["type"] = AppointmentType::find($this->appointment_type_id)->type;
 		$data[ "date_and_time" ] = Carbon::parse($this->date . " " . $this->time)
 										 ->format('Y-m-d H:i:s');
-		
+
 		if (!is_null($this->appointment->id)) {
 			$this->appointment->update($data);
 			session()->flash("message", "Appointment successfully updated.");
@@ -75,12 +75,13 @@ class AppointmentForm extends Component {
 	public function rules (): array {
 		
 		return [
-			"patient_id" => [ "required", "exists:patients,id" ],
-			"date"       => [ "required", "date", "date_format:Y-m-d", "after_or_equal:today", new AppointmentExists ],
-			"time"       => [ "required" ],
-			"length"     => [ "required" ],
-			"title"      => [ "required", "string" ],
-			"type"       => [ "required", "string" ],
+			"patient_id"          => [ "required", "exists:patients,id" ],
+    		"appointment_type_id" => [ "required", "exists:appointment_types,id" ],
+			"date"                => [ "required", "date", "date_format:Y-m-d", new AppointmentExists ],
+			"time"                => [ "required" ],
+			"length"              => [ "required" ],
+			"title"               => [ "required", "string" ],
+			"type"				  => ["nullable"]
 		];
 	}
 	

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder {
 		
 //		(new UserSeeder())->run();
 //		(new PatientSeeder())->run();
-		(new AppointmentTypeSeeder())->run();
+//		(new AppointmentTypeSeeder())->run();
      	(new AppointmentSeeder())->run();
 //		(new MediaSeeder())->run();
 	}
