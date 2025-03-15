@@ -3,6 +3,7 @@
 namespace [namespace];
 
 use Livewire\Component;
+use Illuminate\View\View;
 
 class [class] extends Component
 {
