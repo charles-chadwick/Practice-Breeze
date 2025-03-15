@@ -29,6 +29,9 @@
 				icon="check-circle"
 				heading="{{ session('message')  }}" />
 	@endif
+
+	{{ $appointments->links() }}
+
 	<flux:table>
 		<flux:table.columns>
 			<flux:table.cell>
@@ -61,7 +64,7 @@
 						</flux:badge>
 						</flux:table.cell>
 					<flux:table.cell>{{ $appointment->status }}</flux:table.cell>
-					<flux:table.cell>{{ $appointment->type->title }}</flux:table.cell>
+					<flux:table.cell>{{ $appointment->type }}</flux:table.cell>
 					<flux:table.cell>{{ $appointment->title }}</flux:table.cell>
 					<flux:table.cell>
 						<flux:link :href="route('appointments.index', ['patient_id' => $appointment->patient->id])">
@@ -92,10 +95,15 @@
 							<livewire:appointment-form :appointment="$appointment"></livewire:appointment-form>
 						</flux:modal>
 					</flux:table.cell>
-				
-				
 				</flux:table.row>
 			@endforeach
+		</flux:table.rows>
+		<flux:table.rows>
+			<flux:table.row>
+				<flux:table.cell colspan="7">
+				{{ $appointments->links() }}
+				</flux:table.cell>
+			</flux:table.row>
 		</flux:table.rows>
 	</flux:table>
 @endsection
