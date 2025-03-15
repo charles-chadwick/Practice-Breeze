@@ -3,7 +3,7 @@
 	
 	<div class="flex">
 		<div class="flex-1">
-			{{ __("Patients") }}
+			{{ __("Appointments") }}
 		</div>
 		<div>
 			
@@ -63,7 +63,11 @@
 					<flux:table.cell>{{ $appointment->status }}</flux:table.cell>
 					<flux:table.cell>{{ $appointment->type }}</flux:table.cell>
 					<flux:table.cell>{{ $appointment->title }}</flux:table.cell>
-					<flux:table.cell>{{ $appointment->patient->full_name }}</flux:table.cell>
+					<flux:table.cell>
+						<flux:link :href="route('appointments.index', ['patient_id' => $appointment->patient->id])">
+						{{ $appointment->patient->full_name }}
+						</flux:link>
+					</flux:table.cell>
 					
 					<flux:table.cell>
 						<flux:dropdown>
