@@ -9,8 +9,9 @@ class Appointment extends Base {
 	
 	protected $fillable = [
 		"patient_id",
-		"type",
+		"appointment_type_id",
 		"date_and_time",
+		"type",
 		"length",
 		"status",
 		"title",
@@ -25,6 +26,16 @@ class Appointment extends Base {
 	public function patient (): BelongsTo {
 		
 		return $this->belongsTo(Patient::class, "patient_id");
+	}
+	
+	/**
+	 * Appointment Type relationship
+	 *
+	 * @return BelongsTo
+	 */
+	public function type (): BelongsTo {
+		
+		return $this->belongsTo(AppointmentType::class, "appointment_type_id");
 	}
 	
 	/**

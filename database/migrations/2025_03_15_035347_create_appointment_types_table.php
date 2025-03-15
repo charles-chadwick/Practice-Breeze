@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('appointment_types', function (Blueprint $table) {
             $table->id();
-			$table->unsignedBigInteger("patient_id");
-			$table->unsignedBigInteger("appointment_type_id");
-			$table->dateTime("date_and_time");
+			$table->string('title');
+			$table->text('description');
 			$table->integer("length");
-			$table->string("status");
-			$table->string("title");
-			$table->text("comments")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('appointment_types');
     }
 };
