@@ -33,8 +33,22 @@
 		<flux:table.columns>
 			<flux:table.cell>
 				MRN
-			</flux:table.cell>			<flux:table.cell>
-				<flux:link :href="route('patients.index', ['order_by' => 'first_name'])">First Name</flux:link>
+			</flux:table.cell>
+			<flux:table.cell>
+				<div class="grid grid-col-3">
+					<div class="font-bold">First Name</div>
+					<div>
+						<flux:link :href="route('patients.index', ['order_by' => 'first_name'])">
+							<flux:icon icon="chevron-up" />
+						</flux:link>
+					</div>
+					<div>
+						<flux:link :href="route('patients.index', ['order_by' => 'first_name'])">
+							<flux:icon icon="chevron-up" />
+						</flux:link>
+					</div>
+				
+				</div>
 			</flux:table.cell>
 			<flux:table.cell>
 				<flux:link :href="route('patients.index', ['order_by' => 'middle_name'])">Middle Name</flux:link>
